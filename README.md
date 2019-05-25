@@ -9,6 +9,12 @@ Currently only supports signed int32 indexes and doubles.
 
 Ideas and contributions are welcome. Tests and benchmarks need to be added.
 
+# Nuget Package
+https://www.nuget.org/packages/Flatbush/
+```
+Install-Package Flatbush
+```
+
 # Documentation
 See SpatialIndex class methods and example code below.
 
