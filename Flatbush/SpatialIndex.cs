@@ -96,7 +96,7 @@ namespace Flatbush
 
             var width = this.MaxX - this.MinX;
             var height = this.MaxY - this.MinY;
-            var hilbertValues = new int[_numItems];
+            var hilbertValues = new uint[_numItems];
             const int hilbertMax = (1 << 16) - 1;
             int pos = 0;
 
@@ -111,7 +111,7 @@ namespace Flatbush
 
                 var x = (uint)Math.Floor(hilbertMax * ((minX + maxX) / 2 - this.MinX) / width);
                 var y = (uint)Math.Floor(hilbertMax * ((minY + maxY) / 2 - this.MinY) / height);
-                hilbertValues[i] = (int)Hilbert(x, y);
+                hilbertValues[i] = Hilbert(x, y);
             }
 
             // sort items by their Hilbert value (for packing later)
@@ -300,7 +300,7 @@ namespace Flatbush
         }
 
         // custom quicksort that sorts bbox data alongside the hilbert values
-        private static void Sort(int[] values, double[] boxes, int[] indices, int left, int right)
+        private static void Sort(uint[] values, double[] boxes, int[] indices, int left, int right)
         {
             if (left >= right) return;
 
@@ -321,7 +321,7 @@ namespace Flatbush
         }
 
         // swap two values and two corresponding boxes
-        private static void Swap(int[] values, double[] boxes, int[] indices, int i, int j)
+        private static void Swap(uint[] values, double[] boxes, int[] indices, int i, int j)
         {
             var temp = values[i];
             values[i] = values[j];

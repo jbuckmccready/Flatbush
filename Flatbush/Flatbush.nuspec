@@ -8,11 +8,11 @@
     <owners>jbuckmccready</owners>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/jbuckmccready/Flatbush</projectUrl>
-	<repository type="git" url="https://github.com/jbuckmccready/Flatbush"></repository>
+	  <repository type="git" url="https://github.com/jbuckmccready/Flatbush"></repository>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>C# port of the fast static 2d spatial index Flatbush (https://github.com/mourner/flatbush/)</description>
-	<summary>Very fast static 2d spatial index utilizing a packed hilbert R-tree (ported from https://github.com/mourner/flatbush/)</summary>
-    <releaseNotes>Added missing xml doc file for nuget package</releaseNotes>
+	  <summary>Very fast static 2d spatial index utilizing a packed hilbert R-tree (ported from https://github.com/mourner/flatbush/)</summary>
+    <releaseNotes>Fixed hilbert values to use unsigned int (improved performance)</releaseNotes>
     <tags>spatial index geometry 2d computation r-tree algorithm tree</tags>
   </metadata>
 </package>
