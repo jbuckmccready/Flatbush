@@ -5,7 +5,7 @@ Implementation is a packed hilbert R-tree (https://en.wikipedia.org/wiki/Hilbert
 
 Currently does not support k nearest neighbors query (which is implemented in the javascript version). I added an additional method to use a visiting function which allows for stopping the query early and does not require having to return the index results.
 
-Currently only supports signed int32 indexes and doubles.
+Currently only supports signed int32 indexes and doubles for bounding box extents.
 
 Ideas and contributions are welcome. Tests and benchmarks need to be added.
 
