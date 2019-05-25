@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>C# port of the fast static 2d spatial index Flatbush (https://github.com/mourner/flatbush/)</description>
 	<summary>Very fast static 2d spatial index utilizing a packed hilbert R-tree (ported from https://github.com/mourner/flatbush/)</summary>
-    <releaseNotes>Initial public release</releaseNotes>
+    <releaseNotes>Added missing xml doc file for nuget package</releaseNotes>
     <tags>spatial index geometry 2d computation r-tree algorithm tree</tags>
   </metadata>
 </package>
