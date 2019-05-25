@@ -3,9 +3,11 @@ C# port of the fast static 2d spatial index Flatbush in javascript (https://gith
 
 Implementation is a packed hilbert R-tree (https://en.wikipedia.org/wiki/Hilbert_R-tree#Packed_Hilbert_R-trees), the library is built purely for speed. All queries return indices to the boxes that were added at time of build up. Entries cannot be added or removed after calling the Finish method (static structure).
 
-Currently does not support k nearest neighbors query (which is implemented in the javascript version), but I added an additional method to use a visiting function which allows for stopping the query early and does not require having to return the index results.
+Currently does not support k nearest neighbors query (which is implemented in the javascript version). I added an additional method to use a visiting function which allows for stopping the query early and does not require having to return the index results.
 
 Currently only supports 32bit indexes and doubles (64bit floats).
+
+Ideas and contributions are welcome. Tests and benchmarks need to be added.
 
 # Documentation
 See SpatialIndex class methods and example code below.
