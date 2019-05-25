@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>jbuckmccready</authors>
+    <owners>jbuckmccready</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/jbuckmccready/Flatbush</projectUrl>
+	<repository type="git" url="https://github.com/jbuckmccready/Flatbush"></repository>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>C# port of the fast static 2d spatial index Flatbush (https://github.com/mourner/flatbush/)</description>
+	<summary>Very fast static 2d spatial index utilizing a packed hilbert R-tree (ported from https://github.com/mourner/flatbush/)</summary>
+    <releaseNotes>Initial release</releaseNotes>
+    <tags>spatial index geometry 2d computation r-tree algorithm tree</tags>
+  </metadata>
+</package>
