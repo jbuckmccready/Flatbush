@@ -8,4 +8,6 @@
 [Rr]elease/
 build/
 [Bb]in/
-[Oo]bj/
+[Oo]bj/]
+# Xml doc file
+Flatbush.xml
