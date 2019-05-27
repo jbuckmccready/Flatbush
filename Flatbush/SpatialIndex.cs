@@ -92,12 +92,13 @@ namespace Flatbush
         public void Finish()
         {
             if (_pos >> 2 != _numItems)
+            {
                 throw new InvalidOperationException($"Added {_pos >> 2} items when expected {_numItems}.");
+            }
 
             var width = this.MaxX - this.MinX;
             var height = this.MaxY - this.MinY;
             var hilbertValues = new uint[_numItems];
-            const int hilbertMax = (1 << 16) - 1;
             int pos = 0;
 
             // map item centers into Hilbert coordinate space and calculate Hilbert values
@@ -109,6 +110,12 @@ namespace Flatbush
                 var maxX = _boxes[pos++];
                 var maxY = _boxes[pos++];
 
+                const int n = 1 << 16;
+                // hilbert max input value for x and y
+                const int hilbertMax = n - 1;
+                // mapping the x and y coordinates of the center of the box to values in the range [0 -> n - 1] such that
+                // the min of the entire set of bounding boxes maps to 0 and the max of the entire set of bounding boxes maps to n - 1
+                // our 2d space is x: [0 -> n-1] and y: [0 -> n-1], our 1d hilbert curve value space is d: [0 -> n^2 - 1]
                 var x = (uint)Math.Floor(hilbertMax * ((minX + maxX) / 2 - this.MinX) / width);
                 var y = (uint)Math.Floor(hilbertMax * ((minY + maxY) / 2 - this.MinY) / height);
                 hilbertValues[i] = Hilbert(x, y);
