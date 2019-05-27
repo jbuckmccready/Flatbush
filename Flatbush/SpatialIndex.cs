@@ -189,7 +189,7 @@ namespace Flatbush
                 // search through child nodes
                 for (var pos = nodeIndex; pos < end; pos += 4)
                 {
-                    var index = this._indices[pos >> 2] | 0;
+                    var index = this._indices[pos >> 2];
 
                     // check if node bbox intersects with query bbox
                     if (maxX < _boxes[pos]) continue; // maxX < nodeMinX
@@ -263,7 +263,7 @@ namespace Flatbush
                 // search through child nodes
                 for (var pos = nodeIndex; pos < end; pos += 4)
                 {
-                    var index = this._indices[pos >> 2] | 0;
+                    var index = this._indices[pos >> 2];
 
                     // check if node bbox intersects with query bbox
                     if (maxX < _boxes[pos]) continue; // maxX < nodeMinX
@@ -395,7 +395,7 @@ namespace Flatbush
             i1 = (i1 | (i1 << 2)) & 0x33333333;
             i1 = (i1 | (i1 << 1)) & 0x55555555;
 
-            return ((i1 << 1) | i0) >> 0;
+            return (i1 << 1) | i0;
         }
     }
 }
