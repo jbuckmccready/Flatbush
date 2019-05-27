@@ -62,5 +62,6 @@ Utilizing a visiting function that stops the query early
 spatialIndex.VisitQuery(0, 0, 0, 0, i => { Console.Write(i); return i == 1; });
 ```
 ## Additional References
+- Original source code for javascript: https://github.com/mourner/flatbush/
 - Awesome work done for hilbert curve functions: https://github.com/rawrunprotected/hilbert_curves
 - RBush for non-static spatial index: https://github.com/mourner/rbush and https://github.com/viceroypenguin/RBush
