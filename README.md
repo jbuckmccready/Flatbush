@@ -1,9 +1,14 @@
 # Flatbush
-C# port of the fast static 2d spatial index Flatbush in javascript (https://github.com/mourner/flatbush/).
+C# port of the fast static 2d spatial index Flatbush in javascript, check it out [here](https://github.com/mourner/flatbush/).
 
-Implementation is a packed hilbert R-tree (https://en.wikipedia.org/wiki/Hilbert_R-tree#Packed_Hilbert_R-trees), the library is built purely for speed. All queries return indices to the boxes that were added at time of build up. Entries cannot be added or removed after calling the Finish method (static structure).
+Implementation is a [packed Hilbert R-tree](https://en.wikipedia.org/wiki/Hilbert_R-tree#Packed_Hilbert_R-trees).
+- Very memory efficient and fast (tree nodes are packed into an array)
+- Static size (no adding or removing items after indexing)
+- Supports 2d axis aligned bounding boxes (point queries are done using a box with no height or width)
 
-Currently does not support k nearest neighbors query (which is implemented in the javascript version). I added an additional method to use a visiting function which allows for stopping the query early and does not require having to return the index results.
+This structure is useful for computational geometry algorithms, e.g. finding all intersections between two arbitrary curves (mapping segments to bounding boxes), hit testing, 2d bounding box selections, etc.
+
+Currently does not support k nearest neighbors query (which is implemented in the javascript version utilizing a priority queue). I added an additional method to use a visiting function which allows for stopping the query early and does not require having to return the index results.
 
 Currently only supports signed int32 indexes and doubles for bounding box extents.
 
@@ -19,7 +24,7 @@ Install-Package Flatbush
 See SpatialIndex class methods and example code below.
 
 # Example Code
-Build the index up
+Build the spatial index up
 ```csharp
 using Flatbush;
 // Create a new spatial index to hold 5 boxes
@@ -32,9 +37,9 @@ spatialIndex.Add(9.9, 10.1, 20.2, 20.9); // index 4
 // Done adding items, build the index
 spatialIndex.Finish();
 ```
-Query the index
+Query the spatial index
 ```csharp
-// Query all boxes that overlap or intersect a box on the point 0,0
+// Query all boxes (results are integer indices) that overlap a point at 0,0
 var results = spatialIndex.Query(0, 0, 0, 0);
 // Prints the set [0, 1, 2] (order not defined)
 foreach (var i in results)
@@ -54,14 +59,25 @@ foreach (var i in results)
 Utilizing a visiting function
 ```csharp
 // Visit all query results with a function rather than having a list of indices returned
-spatialIndex.VisitQuery(12, 12, 15, 15, i => { Console.Write(i); return true; });
+spatialIndex.VisitQuery(12, 12, 15, 15, i => 
+    { 
+        Console.Write(i);
+        // we return true to visit all the results
+        return true; 
+    });
 ```
 Utilizing a visiting function that stops the query early
 ```csharp
-// Visit query results until index equals 1
-spatialIndex.VisitQuery(0, 0, 0, 0, i => { Console.Write(i); return i == 1; });
+int visited = 0;
+spatialIndex.VisitQuery(0, 0, 0, 0, i => 
+    {
+        Console.Write(i);
+        visited += 1;
+        // visit only the first two results
+        return visited < 2; 
+    });
 ```
-## Additional References
+# Additional References
 - Original source code for javascript: https://github.com/mourner/flatbush/
 - Awesome work done for hilbert curve functions: https://github.com/rawrunprotected/hilbert_curves
 - RBush for non-static spatial index: https://github.com/mourner/rbush and https://github.com/viceroypenguin/RBush
