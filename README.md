@@ -24,7 +24,7 @@ Install-Package Flatbush
 See SpatialIndex class methods and example code below.
 
 # Example Code
-Build the spatial index up
+### Build the spatial index up
 ```csharp
 using Flatbush;
 // Create a new spatial index to hold 5 boxes
@@ -37,7 +37,7 @@ spatialIndex.Add(9.9, 10.1, 20.2, 20.9); // index 4
 // Done adding items, build the index
 spatialIndex.Finish();
 ```
-Query the spatial index
+### Query the spatial index
 ```csharp
 // Query all boxes (results are integer indices) that overlap a point at 0,0
 var results = spatialIndex.Query(0, 0, 0, 0);
@@ -47,33 +47,35 @@ foreach (var i in results)
     Console.Write(i);
 }
 ```
-Utilizing a filter function
+### Utilizing a filter function
 ```csharp
-// Same as previous query but index 1 will not be included
+// Same as previous query (point at 0,0) but index 1 will not be included
 results = spatialIndex.Query(0, 0, 0, 0, i => i != 1);
 foreach (var i in results)
 {
     Console.Write(i);
 }
 ```
-Utilizing a visiting function
+### Utilizing a visiting function
 ```csharp
 // Visit all query results with a function rather than having a list of indices returned
+// Querying results that intersect/overlap with the bounding box defined by
+// (MinX = 12, MinY = 12, MaxX = 15, MaxY = 15)
 spatialIndex.VisitQuery(12, 12, 15, 15, i => 
     { 
         Console.Write(i);
-        // we return true to visit all the results
+        // We return true to visit all the results (stops query early when return is false)
         return true; 
     });
 ```
-Utilizing a visiting function that stops the query early
+### Utilizing a visiting function that stops the query early
 ```csharp
 int visited = 0;
 spatialIndex.VisitQuery(0, 0, 0, 0, i => 
     {
         Console.Write(i);
         visited += 1;
-        // visit only the first two results
+        // Visit only the first two results
         return visited < 2; 
     });
 ```
