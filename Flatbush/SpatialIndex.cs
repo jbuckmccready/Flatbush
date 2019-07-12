@@ -23,6 +23,11 @@ namespace Flatbush
         /// <param name="nodeSize">Size of the tree node, adjust to tune for particular use case performance.</param>
         public SpatialIndex(int numItems, int nodeSize = 16)
         {
+            if (numItems <= 0)
+            {
+                throw new ArgumentException("numItems must be greater than zero", nameof(numItems));
+            }
+
             _numItems = numItems;
             _nodeSize = Math.Min(Math.Max(nodeSize, 2), 65535);
             // calculate the total number of nodes in the R-tree to allocate space for
