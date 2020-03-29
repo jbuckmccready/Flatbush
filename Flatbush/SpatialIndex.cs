@@ -101,6 +101,18 @@ namespace Flatbush
                 throw new InvalidOperationException($"Added {_pos >> 2} items when expected {_numItems}.");
             }
 
+            // if number of items is less than node size then skip sorting since each node of boxes must be
+            // fully scanned regardless and there is only one node
+            if (_numItems <= _nodeSize)
+            {
+                 // fill root box with total extents
+                _boxes[_pos++] = MinX;
+                _boxes[_pos++] = MinY;
+                _boxes[_pos++] = MaxX;
+                _boxes[_pos++] = MaxY;
+                return;
+            }
+
             var width = this.MaxX - this.MinX;
             var height = this.MaxY - this.MinY;
             var hilbertValues = new uint[_numItems];
