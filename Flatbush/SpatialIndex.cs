@@ -139,7 +139,7 @@ namespace Flatbush
             }
 
             // sort items by their Hilbert value (for packing later)
-            Sort(hilbertValues, _boxes, _indices, 0, _numItems - 1);
+            Sort(hilbertValues, _boxes, _indices, 0, _numItems - 1, _nodeSize);
 
             // generate nodes at each tree level, bottom-up
             pos = 0;
@@ -323,10 +323,14 @@ namespace Flatbush
             }
         }
 
-        // custom quicksort that sorts bbox data alongside the hilbert values
-        private static void Sort(uint[] values, double[] boxes, int[] indices, int left, int right)
+        // custom quicksort that partially sorts bbox data alongside the hilbert values
+        private static void Sort(uint[] values, double[] boxes, int[] indices, int left, int right, int nodeSize)
         {
-            if (left >= right) return;
+            // check against nodeSize (only need to sort down to nodeSize buckets)
+            if (left / nodeSize >= right / nodeSize)
+            {
+                return;
+            }
 
             var pivot = values[(left + right) >> 1];
             var i = left - 1;
@@ -340,8 +344,8 @@ namespace Flatbush
                 Swap(values, boxes, indices, i, j);
             }
 
-            Sort(values, boxes, indices, left, j);
-            Sort(values, boxes, indices, j + 1, right);
+            Sort(values, boxes, indices, left, j, nodeSize);
+            Sort(values, boxes, indices, j + 1, right, nodeSize);
         }
 
         // swap two values and two corresponding boxes
